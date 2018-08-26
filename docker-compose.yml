@@ -1,0 +1,20 @@
+version: '3'
+services:
+  tower:
+    build:
+      context: ./Tower
+      dockerfile: Dockerfile-tower
+    ports:
+      - "443:443"
+    environment:
+      SERVER_NAME: localhost
+
+  jenkins:
+    build:
+      context: ./Jenkins
+      dockerfile: Dockerfile-jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - "./Jenkins/jenkins_home:/var/jenkins_home"

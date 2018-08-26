@@ -1,0 +1,4 @@
+FROM ybalt/ansible-tower
+
+
+RUN sudo pip install ansible-tower-cli
