@@ -16,5 +16,24 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+    links:
+      - "tower"
     volumes:
       - "./Jenkins/jenkins_home:/var/jenkins_home"
+
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost:9090'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        gitlab_rails['gitlab_email_enabled'] = false
+    ports:
+      - '9090:9090'
+      - '2224:22'
+    volumes:
+      - '/srv/gitlab/config:/etc/gitlab'
+      - '/srv/gitlab/logs:/var/log/gitlab'
+      - '/srv/gitlab/data:/var/opt/gitlab'

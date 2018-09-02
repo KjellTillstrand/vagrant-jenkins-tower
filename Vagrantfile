@@ -4,15 +4,17 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "centos/7"
-  
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096
     v.cpus = 2
   end
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080
-  config.vm.network "forwarded_port", guest: 443, host: 443 
+  config.vm.network "forwarded_port", guest: 443, host: 443
   config.vm.network "forwarded_port", guest: 9200, host: 9200
+  config.vm.network "forwarded_port", guest: 9090, host: 9090
+  config.vm.network "forwarded_port", guest: 2224, host: 2224
   config.vm.network "private_network", ip: "192.168.33.10"
 
   config.vm.provision "shell", inline: <<-SHELL
@@ -24,7 +26,7 @@ Vagrant.configure("2") do |config|
      sudo yum -y install epel-release
      sudo yum install -y python-pip
      sudo pip install docker-compose
-     sudo yum -y upgrade python* 
+     sudo yum -y upgrade python*
      cd /vagrant
      sudo docker-compose up -d
    SHELL
