@@ -18,18 +18,21 @@ After i while all container should be up and running.
 #### Jenkins
 URL: http://192.168.33.10:8080/
 
-Get admin jenkins login key by running
-`vagrant ssh -c 'sudo docker logs vagrant_jenkins_1; exit'`
+Login
+user: admin
+password: password
 
 ##### todos
-* Auto install plugins from file.
 * Add GitLab credentials
-*
 
 
 #### Tower
 
 URL: https://192.168.33.10
+
+Login
+user: admin
+password: password 
 
 Get a lisence file from redhat and save it in the vagrant folder as tower-licence.json and add the following line  `"eula_accepted": true
 
@@ -41,6 +44,12 @@ Get a lisence file from redhat and save it in the vagrant folder as tower-licenc
 
 URL: http://192.168.33.10:9090
 
+Login
+User: root
+passoword: password
+
+To create an access token run the following after the GiLab instance is up and running. (takes a minute)
+vagrant ssh -c "sudo docker exec -ti vagrant_gitlab_1 gitlab-rails r "\""token = PersonalAccessToken.new(user: User.where(id: 1).first, name: 'temp token', token: 'token-1', scopes: ['api','read_user','sudo']); token.save"\"" '!'"
+
 ##### todos
 * Set up Group and repo
-* It would be nice to be able to create an personal_accesss_token at container creating time and with that create groups, users and repos.

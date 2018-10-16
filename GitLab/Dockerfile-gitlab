@@ -1,0 +1,6 @@
+FROM gitlab/gitlab-ce:latest
+
+USER root
+
+## Create an access token for 'passwordTokenNr1' root user
+# RUN gitlab-rails r "token = PersonalAccessToken.new(user: User.where(id: 1).first, name: 'temp token', token: 'passwordTokenNr1', scopes: ['api','read_user','sudo']); token.save"'!'

@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
      sudo yum -y upgrade python*
      cd /vagrant
      sudo docker-compose up -d
-     curl --user admin:password -vk POST https://192.168.33.10/api/v2/config/ -d @tower-licence.json --header "Content-Type: application/json"
+     # This will not work as the tower instance is not fully running at this point in time. 
+     # curl --user admin:password -vk POST https://192.168.33.10/api/v2/config/ -d @tower-license.json --header "Content-Type: application/json"
    SHELL
 end
