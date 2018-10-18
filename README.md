@@ -4,7 +4,7 @@
 
 I've been doing quite a lot of tests trying to make my ansible tower instance as stateless as possible by provisioning it via Jenkins pipelines. I'm sharing my test environment here.
 
-
+![Alt text](Vagrant_Jenkins_Tower.jpeg?raw=true "Title")
 ### Requirements
 You need to have vagrant and virtualbox installed.
 
