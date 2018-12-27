@@ -1,0 +1,10 @@
+unclassified:
+  gitLabConnectionConfig:
+    connections:
+    - apiTokenId: "GITLAB-TOKEN"
+      clientBuilderId: "autodetect"
+      connectionTimeout: 10
+      ignoreCertificateErrors: false
+      name: "GitLab"
+      readTimeout: 10
+      url: "http://192.168.33.10:9090"

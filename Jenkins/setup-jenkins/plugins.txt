@@ -1,0 +1,11 @@
+configuration-as-code:latest
+configuration-as-code-support:latest
+git:latest
+credentials:latest
+ssh-credentials:latest
+credentials-binding:latest
+gitlab-plugin:latest
+gitlab-oauth:latest
+docker-plugin:latest
+docker-workflow:latest
+pipeline-model-definition:latest

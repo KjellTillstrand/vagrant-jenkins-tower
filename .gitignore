@@ -1,2 +1,5 @@
 .vagrant
 tower-license.json
+.DS_Store
+jenkins-cli.jar
+ansible

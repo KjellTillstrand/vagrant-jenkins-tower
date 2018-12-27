@@ -1,9 +1,17 @@
 version: '3'
 services:
+  #nexus:
+    #image: sonatype/nexus3
+    #volumes:
+    #  - "./nexus/nexus-data:/nexus-data"
+    #ports:
+    #  - "8081:8081"
+  
   tower:
     build:
       context: ./Tower
       dockerfile: Dockerfile-tower
+    container_name: tower
     ports:
       - "443:443"
     environment:
@@ -13,6 +21,7 @@ services:
     build:
       context: ./Jenkins
       dockerfile: Dockerfile-jenkins
+    container_name: jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -20,11 +29,13 @@ services:
       - "tower"
     volumes:
       - "./Jenkins/jenkins_home:/var/jenkins_home"
-
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/var/run/docker.sock:/var/run/docker.sock"
   gitlab:
     build:
       context: ./GitLab
       dockerfile: Dockerfile-gitlab
+    container_name: gitlab
     image: 'gitlab/gitlab-ce:latest'
     restart: always
     hostname: 'gitlab.example.com'
@@ -38,6 +49,41 @@ services:
       - '9090:9090'
       - '2224:22'
     volumes:
-      - './GitLab//srv/gitlab/config:/etc/gitlab'
-      - './GitLab//srv/gitlab/logs:/var/log/gitlab'
+      - './GitLab/srv/gitlab/config:/etc/gitlab'
+      - './GitLab/srv/gitlab/logs:/var/log/gitlab'
       - './GitLab/srv/gitlab/data:/var/opt/gitlab'
+
+  #elasticsearch:
+  #  build:
+  #    context: ./ES
+  #    dockerfile: Dockerfile-elasticsearch
+  #  container_name: elasticsearch
+  #  environment:
+  #    - cluster.name=docker-cluster
+  #    - bootstrap.memory_lock=true
+  #    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #  ulimits:
+  #    memlock:
+  #      soft: -1
+  #      hard: -1
+    # volumes:
+    #  - ./ES/data1:/usr/share/elasticsearch/data
+  #  ports:
+  #    - 9200:9200
+
+  #elasticsearch2:
+  #  build:
+  #    context: ./ES
+  #    dockerfile: Dockerfile-elasticsearch
+  #  container_name: elasticsearch2
+  #  environment:
+  #    - cluster.name=docker-cluster
+  #    - bootstrap.memory_lock=true
+  #    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #    - "discovery.zen.ping.unicast.hosts=elasticsearch"
+  #  ulimits:
+  #    memlock:
+  #      soft: -1
+  #      hard: -1
+  #  # volumes:
+  #  #  - ./ES/data2:/usr/share/elasticsearch/data

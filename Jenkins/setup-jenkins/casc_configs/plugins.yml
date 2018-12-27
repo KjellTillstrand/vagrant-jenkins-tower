@@ -1,0 +1,5 @@
+plugins:
+  required:
+    git: latest
+    credentials:latest
+    credentials-binding:latest
